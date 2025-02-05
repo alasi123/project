@@ -1,0 +1,29 @@
+<script>
+    function validateAccess() {
+        const email = document.getElementById('email').value.toLowerCase();
+        const employees = [
+            "john", "sarah", "michael", "lisa", "david", "emily", "robert", "jessica", "james", "laura"
+        ];
+        
+        let authorized = false;
+        let employeeName = "";
+        
+        employees.forEach(name => {
+            if (email.includes(name)) {
+                authorized = true;
+                employeeName = name;
+            }
+        });
+        
+        if (authorized) {
+            window.location.href = employeeName + ".html";
+        } else {
+            alert("Access Denied. Email does not match any employee record.");
+        }
+    }
+</script>
+</head>
+<h2>Employee Login</h2>
+<input type="email" id="email" placeholder="Enter your email" required>
+<button onclick="validateAccess()">Login</button>
+<body>

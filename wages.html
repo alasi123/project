@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="website icon" href="HR-career.avif">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-4">Salary Management</h2>
+        
+        <!-- Employee Salary Table -->
+        <table class="w-full border-collapse border border-gray-300">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border p-2">Employee ID</th>
+                    <th class="border p-2">Basic Salary</th>
+                    <th class="border p-2">Bonuses</th>
+                    <th class="border p-2">Deductions</th>
+                    <th class="border p-2">Net Salary</th>
+                </tr>
+            </thead>
+            <tbody id="salaryTable"></tbody>
+        </table>
+        
+        <!-- Add Bonuses and Deductions -->
+        <div class="mt-6">
+            <h3 class="text-xl font-semibold mb-2">Update Salary</h3>
+            <form id="salaryForm" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700">Employee ID:</label>
+                    <input type="text" id="employeeId" class="w-full p-2 border rounded" placeholder="Enter Employee ID">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Basic Salary:</label>
+                    <input type="number" id="basicSalary" class="w-full p-2 border rounded" placeholder="Enter Basic Salary">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Bonuses:</label>
+                    <input type="number" id="bonuses" class="w-full p-2 border rounded" placeholder="Enter Bonuses">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Deductions:</label>
+                    <input type="number" id="deductions" class="w-full p-2 border rounded" placeholder="Enter Deductions">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Net Salary:</label>
+                    <input type="text" id="netSalary" class="w-full p-2 border rounded" disabled>
+                </div>
+                <button type="button" id="updateSalary" class="bg-blue-500 text-white px-4 py-2 rounded">Update Salary</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", loadSalaries);
+        document.getElementById("updateSalary").addEventListener("click", updateSalary);
+
+        function loadSalaries() {
+            let salaries = JSON.parse(localStorage.getItem("salaries")) || [];
+            let table = document.getElementById("salaryTable");
+            table.innerHTML = "";
+            salaries.forEach(salary => {
+                let row = `<tr>
+                    <td class='border p-2 text-center'>${salary.employeeId}</td>
+                    <td class='border p-2 text-center'>$${salary.basicSalary}</td>
+                    <td class='border p-2 text-center'>$${salary.bonuses}</td>
+                    <td class='border p-2 text-center'>$${salary.deductions}</td>
+                    <td class='border p-2 text-center font-bold'>$${salary.netSalary}</td>
+                </tr>`;
+                table.innerHTML += row;
+            });
+        }
+
+        function updateSalary() {
+            let employeeId = document.getElementById("employeeId").value;
+            let basicSalary = parseFloat(document.getElementById("basicSalary").value);
+            let bonuses = parseFloat(document.getElementById("bonuses").value);
+            let deductions = parseFloat(document.getElementById("deductions").value);
+
+            if (isNaN(basicSalary) || basicSalary <= 0) {
+                alert("Please enter a valid basic salary.");
+                return;
+            }
+            if (isNaN(bonuses) || bonuses < 0) {
+                alert("Please enter a valid bonus value.");
+                return;
+            }
+            if (isNaN(deductions) || deductions < 0) {
+                alert("Please enter a valid deduction value.");
+                return;
+            }
+
+            let salaries = JSON.parse(localStorage.getItem("salaries")) || [];
+            let employee = salaries.find(emp => emp.employeeId === employeeId);
+            
+            if (employee) {
+                employee.basicSalary = basicSalary;
+                employee.bonuses = bonuses;
+                employee.deductions = deductions;
+                employee.netSalary = basicSalary + bonuses - deductions;
+            } else {
+                salaries.push({
+                    employeeId,
+                    basicSalary,
+                    bonuses,
+                    deductions,
+                    netSalary: basicSalary + bonuses - deductions
+                });
+            }
+
+            localStorage.setItem("salaries", JSON.stringify(salaries));
+            loadSalaries();
+            document.getElementById("netSalary").value = basicSalary + bonuses - deductions;
+            alert("Salary updated successfully!");
+        }
+    </script>
+</body>
+</html>

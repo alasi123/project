@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn.btn-outline-success:hover {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+    <link rel="website icon" href="HR-career.avif">
+</head>
+<body>
+    <h1>Performance Table (good/bad)</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>Efficiency</th>
+                <th>Punctuality</th>
+                <th>Creativity</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <h2>Add New Performance Data</h2>
+    <form id="performanceForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="efficiency">Efficiency:</label>
+        <input type="text" id="efficiency" name="efficiency" required>
+        <br>
+        <label for="punctuality">Punctuality:</label>
+        <input type="text" id="punctuality" name="punctuality" required>
+        <br>
+        <label for="creativity">Creativity:</label>
+        <input type="text" id="creativity" name="creativity" required>
+        <br>
+        <button type="button" onclick="addRow();" class="btn btn-outline-success" style="margin-top: 20px;">Add Row</button>
+    </form>
+
+    <script>
+        function addRow() {
+            const efficiency = document.getElementById('efficiency').value;
+            const punctuality = document.getElementById('punctuality').value;
+            const creativity = document.getElementById('creativity').value;
+            const name = document.getElementById('name').value;
+
+            if (efficiency && punctuality && creativity) {
+                const table = document.querySelector('tbody');
+                const newRow = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                nameCell.textContent = name;
+                newRow.appendChild(nameCell);
+                
+
+                const efficiencyCell = document.createElement('td');
+                efficiencyCell.textContent = efficiency;
+                newRow.appendChild(efficiencyCell);
+
+                const punctualityCell = document.createElement('td');
+                punctualityCell.textContent = punctuality;
+                newRow.appendChild(punctualityCell);
+
+                const creativityCell = document.createElement('td');
+                creativityCell.textContent = creativity;
+                newRow.appendChild(creativityCell);
+
+                table.appendChild(newRow);
+
+                document.getElementById('performanceForm').reset();
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+    </script>
+    <button type="button" onclick="saveDataAndRedirect();" class="btn btn-outline-success" style="margin-top: 20px;">Submit</button>
+    <script>
+        
+        function saveDataAndRedirect() {
+            const tableRows = document.querySelectorAll('tbody tr');
+            const performanceData = [];
+
+            tableRows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowData = {
+                    name: cells[0].textContent,
+                    efficiency: cells[1].textContent,
+                    punctuality: cells[2].textContent,
+                    creativity: cells[3].textContent
+                };
+                performanceData.push(rowData);
+            });
+
+            localStorage.setItem('performanceData', JSON.stringify(performanceData));
+            window.location.href = 'index.html';
+        }
+        function checkPerformance() {
+            const rows = document.querySelectorAll('tbody tr');
+            let goodCount = 0;
+            let badCount = 0;
+    
+            rows.forEach(row => {
+                row.querySelectorAll('td').forEach(cell => {
+                    const cellText = cell.textContent.trim().toLowerCase();
+                    if (cellText === 'good') {
+                        goodCount++;
+                    } else if (cellText === 'bad') {
+                        badCount++;
+                    }
+                });
+            });
+    
+            if (goodCount > badCount) {
+                alert('Good');
+            } else {
+                alert('Bad');
+            }
+        }
+    </script>
+    
+    
+</body>
+</html>
+
+<button type="button" onclick="checkPerformance();" class="btn btn-outline-success" style="margin-top: 20px;">Check Performance</button>

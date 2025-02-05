@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR System Login</title>
+    <link rel="website icon" href="HR-career.avif">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #336ac9;
+        }
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-box {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+        }
+        /* From Uiverse.io by AbanoubMagdy1 */ 
+        .wave-group {
+            position: relative;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .wave-group .input {
+            font-size: 16px;
+            padding: 10px 10px 10px 5px;
+            display: block;
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #515151;
+            background: transparent;
+        }
+
+        .wave-group .input:focus {
+            outline: none;
+        }
+
+        .wave-group .label {
+            color: #999;
+            font-size: 18px;
+            font-weight: normal;
+            position: absolute;
+            pointer-events: none;
+            left: 5px;
+            top: 10px;
+            display: flex;
+        }
+
+        .wave-group .label-char {
+            transition: 0.2s ease all;
+            transition-delay: calc(var(--index) * .05s);
+        }
+
+        .wave-group .input:focus ~ label .label-char,
+        .wave-group .input:valid ~ label .label-char {
+            transform: translateY(-20px);
+            font-size: 14px;
+            color: #5264AE;
+        }
+
+        .wave-group .bar {
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+
+        .wave-group .bar:before,.wave-group .bar:after {
+            content: '';
+            height: 2px;
+            width: 0;
+            bottom: 1px;
+            position: absolute;
+            background: #5264AE;
+            transition: 0.2s ease all;
+            -moz-transition: 0.2s ease all;
+            -webkit-transition: 0.2s ease all;
+        }
+
+        .wave-group .bar:before {
+            left: 50%;
+        }
+
+        .wave-group .bar:after {
+            right: 50%;
+        }
+
+        .wave-group .input:focus ~ .bar:before,
+        .wave-group .input:focus ~ .bar:after {
+            width: 50%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <!--Get your own code at fontawesome.com-->
+</head>
+<body>
+        
+            </nav>
+        <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form action="index.html" method="get">
+                <i class="glyphicon glyphicon-user"></i>
+             <!-- From Uiverse.io by AbanoubMagdy1 --> 
+<div class="wave-group">
+        <input required type="email" id="Email" class="input"  >
+        <span class="bar"></span>
+        <label class="label">
+            <span class="label-char" style="--index: 0">e</span>
+            <span class="label-char" style="--index: 1">m</span>
+            <span class="label-char" style="--index: 2">a</span>
+            <span class="label-char" style="--index: 3">i</span>
+        <span class="label-char" style="--index:4">l</span>
+        </label>
+    </div>
+        <!-- From Uiverse.io by AbanoubMagdy1 -->
+         <br>
+        <div class="wave-group">
+             <i class="fa-solid fa-lock"></i> <input required type="password" id="password" class="input">
+                <span class="bar"></span>
+                <label class="label">
+                        <span class="label-char" style="--index:0">p</span>
+                        <span class="label-char" style="--index:1">a</span>
+                        <span class="label-char" style="--index:2">s</span>
+                        <span class="label-char" style="--index:3">s</span>
+                        <span class="label-char" style="--index:4">w</span>
+                        <span class="label-char" style="--index:5">o</span>
+                        <span class="label-char" style="--index:6">r</span>
+                        <span class="label-char" style="--index:7">d</span>
+                </label>
+        </div>
+                
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="remember">
+                    <label class="form-check-label" for="remember">Remember me</label>
+                </div>
+                <button type="submit" class="btn btn-custom btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
